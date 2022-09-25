@@ -3,6 +3,24 @@
 from dataclasses import dataclass
 from typing import List
 
+@dataclass
+class Materia():
+    nombre: str
+
+@dataclass
+class Carrera(Materia):         #¿Qué metodo hay que utilizar y cómo se utiliza?                 
+    lista = [Materia]           #¿Está bien pensado esto? ¿Por qué la longitud de la lista es 1?
+    length = len(lista)         #¿Cómo se puede resolver?
+    
+
+matematica = Materia("Matemática")
+print(matematica.nombre)
+estadistica = Materia(nombre="Estadística")
+print(estadistica.nombre)
+ciclo_basico = Carrera([matematica, estadistica])
+print(ciclo_basico)
+print((ciclo_basico.length))
+
 
 """Una carrera tiene varias materias, la "longitud" de una carrera hace
 referencia a cuantas materias tiene.

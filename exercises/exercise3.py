@@ -2,6 +2,30 @@
 
 
 class Article:
+
+    _iva: float = 0.21
+
+    def __init__(self, nombre: str, costo: float, descuento = 0):
+        self.nombre = nombre
+        self.__costo = costo
+        self.__descuento = descuento
+    
+    @property
+    def resultado(self):
+        return (self.__costo - self.__descuento) * (self._iva) + self.__costo - self.__descuento
+
+    
+    @classmethod
+    def actualizar_iva(cls, iva: float):
+        cls._iva = iva
+    
+
+article = Article("Zapatillas", 15000, 30)
+print(article.resultado)
+
+Article.actualizar_iva(0.25)
+article.calcularPrecio(article.__costo, article.__descuento)
+
     """Re-Escribir el ejercicio anterior utilizando una property en vez de un
     método de instancia.
 
