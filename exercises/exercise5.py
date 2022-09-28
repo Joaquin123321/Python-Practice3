@@ -22,13 +22,13 @@ Aclaración: Este ejercicio está basado en la realidad pero se realizaron
 múltiples simplificaciones para adecuarlo al contexto del curso.
 
 Restricciones:
-    - Utilizar Dataclasses
+    - Utilizar Dataclasses X
     - Utilizar 3 clases: 1 abstracta y 2 concretas                   
-    - Utilizar 1 variables de instancia en cada clase concreta        
+    - Utilizar 1 variables de instancia en cada clase concreta   X     
     - Utilizar 1 métodos de instancia con polimorfismo                
-    - No utilizar variables de clase
-    - No utilizar métodos de clase
-    - No utilizar properties
+    - No utilizar variables de clase X
+    - No utilizar métodos de clase X
+    - No utilizar properties X
     - Utilizar Type Hints en todos los métodos y variables
 """
 
@@ -37,11 +37,65 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List
 
+class Contribuyente(ABC):
+    @abstractmethod
+    def calcular_sueldos(self):
+        pass
 
 def calcular_sueldos(contribuyentes: List[Contribuyente]):
     """Data una lista de contribuyentes, devuelve una lista de los sueldos de
     cada uno."""
+    sueldos = []
+    for i in contribuyentes:
+        sueldos.append(i.calcular_sueldo())
+    return sueldos
 
+
+@dataclass
+class Monotributista(Contribuyente):
+    ingresoAnual: float
+    
+    def calcular_sueldo(self):
+        
+        ingresoBruto = self.ingresoAnual / 12
+        
+        if self.ingresoAnual < 370000.00:
+            print("Paga 2646,22 mensuales")
+            cantidadSobrante = ingresoAnual - (2646.22 * 12)
+            print(f"Le quedan {cantidadSobrante} pesos")
+
+        elif self.ingresoAnual < 550000.00:
+            print("Paga 2958,95 mensuales")
+            cantidadSobrante = ingresoAnual - (2958.95 * 12)
+            print(f"Le quedan {cantidadSobrante} pesos")
+
+        elif self.ingresoAnual < 770000.00:
+            print("Paga 3382,62 mensuales")
+            cantidadSobrante = ingresoAnual - (3382.62 * 12)
+            print(f"Le quedan {cantidadSobrante} pesos")
+
+        else:
+            print("Paga 3988,85 mensuales")
+            cantidadSobrante = ingresoAnual - (3988.85 * 12)
+            print(f"Le quedan {cantidadSobrante} pesos")
+
+    
+
+@dataclass
+class Empleado(Contribuyente):
+    ingresoAnual = float
+    def calcular_sueldo(self):
+        ingresoBruto = ingresoAnual / 12
+        cantidadPagar = ingresoBruto * 0.17
+        cantidadSobrante = ingresoAnual - (cantidadPagar * 12)
+        print(f"Paga {cantidadPagar} mensuales")
+        print(f"Le quedan {cantidadSobrante} pesos")
+
+
+
+Contribuyente = [Monotributista(80_000), Empleado(80_000)]
+calcular_sueldo(Contribuyente)  
+        
 
 # NO MODIFICAR - INICIO
 assert type(Contribuyente) == abc.ABCMeta, "Contribuyente debe ser abstracta"
@@ -98,6 +152,6 @@ assert maria.calcular_sueldo() == 62250.0
 
 contribuyentes = [Monotributista(80_000), Empleado(80_000)]
 
-assert calcular_sueldos(contribuyentes) == [76011.15, 66400.0]
+assert calcular_sueldo(contribuyentes) == [76011.15, 66400.0]
 
 # NO MODIFICAR - FIN
