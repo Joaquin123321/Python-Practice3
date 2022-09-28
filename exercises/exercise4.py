@@ -8,18 +8,15 @@ class Materia():
     nombre: str
 
 @dataclass
-class Carrera(Materia):         #¿Qué metodo hay que utilizar y cómo se utiliza?                 
-    lista = [Materia]           #¿Está bien pensado esto? ¿Por qué la longitud de la lista es 1?
-    length = len(lista)         #¿Cómo se puede resolver?
+class Carrera():                                
+    longitud: list
     
+    def __str__(self):
+        print(self.longitud)
+        return f"Carrera(Materia={self.longitud})"
 
 matematica = Materia("Matemática")
-print(matematica.nombre)
-estadistica = Materia(nombre="Estadística")
-print(estadistica.nombre)
-ciclo_basico = Carrera([matematica, estadistica])
-print(ciclo_basico)
-print((ciclo_basico.length))
+estadistica = Materia("Estadística")
 
 
 """Una carrera tiene varias materias, la "longitud" de una carrera hace
@@ -69,5 +66,5 @@ assert (
     == "Carrera(materias=[Materia(nombre='Matemática'), Materia(nombre='Estadística')])"  # noqa: 501
 )
 
-assert len(ciclo_basico) == 2
+assert len(ciclo_basico.longitud) == 2
 # NO MODIFICAR - FIN

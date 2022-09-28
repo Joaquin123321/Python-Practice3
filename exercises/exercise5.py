@@ -23,9 +23,9 @@ múltiples simplificaciones para adecuarlo al contexto del curso.
 
 Restricciones:
     - Utilizar Dataclasses
-    - Utilizar 3 clases: 1 abstracta y 2 concretas
-    - Utilizar 1 variables de instancia en cada clase concreta
-    - Utilizar 1 métodos de instancia con polimorfismo
+    - Utilizar 3 clases: 1 abstracta y 2 concretas                   
+    - Utilizar 1 variables de instancia en cada clase concreta        
+    - Utilizar 1 métodos de instancia con polimorfismo                
     - No utilizar variables de clase
     - No utilizar métodos de clase
     - No utilizar properties
