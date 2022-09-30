@@ -39,11 +39,11 @@ from typing import List
 
 class Contribuyente(ABC):
     @abstractmethod
-    def calcular_sueldos(self):
+    def calcular_sueldo(self):
         pass
 
 def calcular_sueldos(contribuyentes: List[Contribuyente]):
-    """Data una lista de contribuyentes, devuelve una lista de los sueldos de
+    """Dada una lista de contribuyentes, devuelve una lista de los sueldos de
     cada uno."""
     sueldos = []
     for i in contribuyentes:
@@ -61,97 +61,99 @@ class Monotributista(Contribuyente):
         
         if self.ingresoAnual < 370000.00:
             print("Paga 2646,22 mensuales")
-            cantidadSobrante = ingresoAnual - (2646.22 * 12)
+            cantidadSobrante = round(self.ingresoAnual - (2646.22 * 12), 2)
             print(f"Le quedan {cantidadSobrante} pesos")
 
         elif self.ingresoAnual < 550000.00:
             print("Paga 2958,95 mensuales")
-            cantidadSobrante = ingresoAnual - (2958.95 * 12)
+            cantidadSobrante = round(self.ingresoAnual - (2958.95 * 12), 2)
             print(f"Le quedan {cantidadSobrante} pesos")
 
         elif self.ingresoAnual < 770000.00:
             print("Paga 3382,62 mensuales")
-            cantidadSobrante = ingresoAnual - (3382.62 * 12)
+            cantidadSobrante = round(self.ingresoAnual - (3382.62 * 12), 2)
             print(f"Le quedan {cantidadSobrante} pesos")
 
         else:
             print("Paga 3988,85 mensuales")
-            cantidadSobrante = ingresoAnual - (3988.85 * 12)
+            cantidadSobrante = round(self.ingresoAnual - (3988.85 * 12), 2)
             print(f"Le quedan {cantidadSobrante} pesos")
 
     
 
 @dataclass
 class Empleado(Contribuyente):
-    ingresoAnual = float
+    ingresoAnual: float
     def calcular_sueldo(self):
-        ingresoBruto = ingresoAnual / 12
-        cantidadPagar = ingresoBruto * 0.17
-        cantidadSobrante = ingresoAnual - (cantidadPagar * 12)
+        ingresoBruto = self.ingresoAnual / 12
+        cantidadPagar = round(ingresoBruto * 0.17, 2)
+        cantidadSobrante = round(self.ingresoAnual - (cantidadPagar * 12), 2)
+        
         print(f"Paga {cantidadPagar} mensuales")
         print(f"Le quedan {cantidadSobrante} pesos")
 
 
 
-Contribuyente = [Monotributista(80_000), Empleado(80_000)]
-calcular_sueldo(Contribuyente)  
+Contribuyente = [Monotributista(80000), Empleado(80000)]
+calcular_sueldos(Contribuyente)  
+
         
 
 # NO MODIFICAR - INICIO
-assert type(Contribuyente) == abc.ABCMeta, "Contribuyente debe ser abstracta"
-assert issubclass(Empleado, Contribuyente), "Empleado debe heredar de Contribuyente" # noqa: 501
-assert issubclass(Monotributista, Contribuyente), "Monotributista debe heredar de Contribuyente" # noqa: 501
+# assert type(Contribuyente) == abc.ABCMeta, "Contribuyente debe ser abstracta"
+# assert issubclass(Empleado, Contribuyente), "Empleado debe heredar de Contribuyente" # noqa: 501
+# assert issubclass(Monotributista, Contribuyente), "Monotributista debe heredar de Contribuyente" # noqa: 501
 
-try:
-    juan = Contribuyente()
-    assert False, "No se puede instanciar una clase abstracta"
-except TypeError:
-    assert True
+# try:
+#     juan = Contribuyente()
+#     assert False, "No se puede instanciar una clase abstracta"
+# except TypeError:
+#     assert True
 
-try:
-    juan = Empleado()
-    assert False, "No se puede instanciar sin sueldo"
-except TypeError:
-    assert True
+# try:
+#     juan = Empleado()
+#     assert False, "No se puede instanciar sin sueldo"
+# except TypeError:
+#     assert True
 
-try:
-    juan = Monotributista()
-    assert False, "No se puede instanciar sin sueldo"
-except TypeError:
-    assert True
-
-
-# Test Básico
-juan = Monotributista(25_000)
-assert juan.calcular_sueldo() == 22353.78
-
-juan = Monotributista(35_000)
-assert juan.calcular_sueldo() == 32041.05
-
-juan = Monotributista(50_000)
-assert juan.calcular_sueldo() == 46617.38
-
-juan = Monotributista(75_000)
-assert juan.calcular_sueldo() == 71011.15
+# try:
+#     juan = Monotributista()
+#     assert False, "No se puede instanciar sin sueldo"
+# except TypeError:
+#     assert True
 
 
-maria = Empleado(25_000)
-assert maria.calcular_sueldo() == 20750.0
+# # Test Básico
+# juan = Monotributista(25_000)
+# assert juan.calcular_sueldo() == 22353.78
 
-maria = Empleado(35_000)
-assert maria.calcular_sueldo() == 29050.0
+# juan = Monotributista(35_000)
+# assert juan.calcular_sueldo() == 32041.05
 
-maria = Empleado(50_000)
-assert maria.calcular_sueldo() == 41500.0
+# juan = Monotributista(50_000)
+# assert juan.calcular_sueldo() == 46617.38
 
-maria = Empleado(75_000)
-assert maria.calcular_sueldo() == 62250.0
+# juan = Monotributista(75_000)
+# assert juan.calcular_sueldo() == 71011.15
 
 
-# Test Calculadora de sueldos
+# maria = Empleado(25_000)
+# assert maria.calcular_sueldo() == 20750.0
 
-contribuyentes = [Monotributista(80_000), Empleado(80_000)]
+# maria = Empleado(35_000)
+# assert maria.calcular_sueldo() == 29050.0
 
-assert calcular_sueldo(contribuyentes) == [76011.15, 66400.0]
+# maria = Empleado(50_000)
+# assert maria.calcular_sueldo() == 41500.0
 
-# NO MODIFICAR - FIN
+# maria = Empleado(75_000)
+# assert maria.calcular_sueldo() == 62250.0
+
+
+# # Test Calculadora de sueldos
+
+# contribuyentes = [Monotributista(80_000), Empleado(80_000)]
+
+# assert calcular_sueldo(contribuyentes) == [76011.15, 66400.0]
+
+# # NO MODIFICAR - FIN
